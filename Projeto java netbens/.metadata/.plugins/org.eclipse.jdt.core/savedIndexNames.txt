@@ -1,0 +1,1 @@
+INDEX VERSION 1.130+C:\Users\ART\Desktop\Projeto java netbens\.metadata\.plugins\org.eclipse.jdt.core

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="com.jaspersoft.studio.server.publish.wizard.Publish2ServerWizard">
+		<item value="857" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="-182" key="dialogY"/>
+		<item value="-1388" key="dialogX"/>
+		<item value="781" key="dialogHeight"/>
+		<item value="857" key="dialogWidth"/>
+		<item value="781" key="DIALOG_HEIGHT"/>
+		<item value="540" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog">
+		<item value="843" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="-171" key="dialogY"/>
+		<item value="-1381" key="dialogX"/>
+		<item value="764" key="dialogHeight"/>
+		<item value="843" key="dialogWidth"/>
+		<item value="764" key="DIALOG_HEIGHT"/>
+		<item value="547" key="DIALOG_X_ORIGIN"/>
+		<item value="19" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>
