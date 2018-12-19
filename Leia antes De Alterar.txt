@@ -1,4 +1,4 @@
-1- Criar SSH 
+.1- Criar SSH 
  
  Tendo cadastrado e logado em sua conta, agora você precisa de uma chave SSH para poder começar a comitar. No Git Bash digite:
 
