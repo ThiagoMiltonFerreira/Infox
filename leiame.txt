@@ -1,0 +1,6 @@
+COPIA O BRANCH QUE FOI CRIADO NO GIT(TESTE) PARA O REPOSITORIO LOCAL NA MAQUINA
+
+$ git checkout -t origin/teste
+...................................................................................
+JA DENTRO DO BRANCH TESTE JA PODE ADD E COMMITAR QUE JA IRA PARA O 
+BRAÇO DE TESTE
