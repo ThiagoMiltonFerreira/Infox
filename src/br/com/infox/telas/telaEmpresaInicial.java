@@ -269,15 +269,16 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtLicontratoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(rbtLicontrato.isSelected()&& lblEmpresa.getText()!="" && lblEndereco.getText()!="" && lblCnpj.getText()!="" && lblEmail.getText()!="" && lblResponsavel.getText()!=""){
-            contrato=true;
+
+       if(!rbtLicontrato.isSelected() || lblEmpresa.getText().equals("") || lblEndereco.getText().equals("") || lblCnpj.getText().equals("") || lblEmail.getText().equals("") || lblResponsavel.getText().equals("") || lbltelefone.getText().equals(""))
+       {
+
+            JOptionPane.showMessageDialog(null,"Campo em branco favor verificar!");
+       }
+       else
+       {
             salvarEmpresaAoEntrar();
-            
-            
-        }else
-        {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!!");     
-        }
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

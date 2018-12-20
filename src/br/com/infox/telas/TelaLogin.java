@@ -30,24 +30,26 @@ public class TelaLogin extends javax.swing.JFrame {
             //Se existir usuario e senha correspondente
             if (rs.next()) {
                 
-                String perfil = rs.getString(6); //Linha abaixo obtem o conteudo do campo perfil da tabela tbusuario de acordo com a posicao do campo no caso o 6 e do status do perfil
-                //System.out.println(perfil);
-                // A decisao abaixo trata o perfil do usuario destrava os botoes para o usaurio admin..
-                if (perfil.equals("admin")) {
-                  // chama a tela de cadastro da empresa caso o usuario for ADM  
-                  telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
-                  empresaInicial.setVisible(true);
-                  
-                  this.dispose(); // fecha tela antiga
+                        String perfil = rs.getString(6); //Linha abaixo obtem o conteudo do campo perfil da tabela tbusuario de acordo com a posicao do campo no caso o 6 e do status do perfil
+                        //System.out.println(perfil);
+                        // A decisao abaixo trata o perfil do usuario destrava os botoes para o usaurio admin..
+                if (perfil.equals("admin")) 
+                {
+                    
+                        // JOptionPane.showMessageDialog(null, "CADASTRO DE EMPRESA");
+                        // chama a tela de cadastro da empresa caso o usuario for ADM  
+                        telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
+                        empresaInicial.setVisible(true);
+                        this.dispose(); 
 
                 }else
                 {
               
+                    // JOptionPane.showMessageDialog(null, "ELSE");
                     // abre a tela inicial travada alguns campos que esta configurado para estar travados para desterminados usuarios se nao for admin
                     TelaPrincipal principal = new TelaPrincipal(); //instacia a nova tela a ser aberta
                     principal.setVisible(true); //abre nova tela
-                    TelaPrincipal.lblUsuario.setText(rs.getString(2)); // Pega o conteudo da coluna 2 do banco de dados(campo nome) e seta para o label. 
-                    //TelaPrincipal.MenCadUsu.setVisible(false); // oculta o campo para o ussuario nao mostra o campo 
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2)); // Pega o conteudo da coluna 2 do banco de dados(campo nome) e seta para o label.  
                     this.dispose(); // fecha tela antiga
                 }
 
@@ -56,12 +58,14 @@ public class TelaLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos!");
                
             }
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             JOptionPane.showMessageDialog(null, "erro:  " + e);
         }
     }
 
-    public TelaLogin() {
+    public TelaLogin() 
+    {
         initComponents();
         ModuloConexao chamaConexao = new ModuloConexao();
         conexao = ModuloConexao.conector();
