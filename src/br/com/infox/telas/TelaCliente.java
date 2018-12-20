@@ -207,6 +207,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Clientes");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(950, 618));
 
         jLabel1.setText("*Campos obrigatorios");
@@ -250,8 +251,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 txtClipesquisarKeyReleased(evt);
             }
         });
-
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\ART\\Desktop\\Projeto java netbens\\Imagens\\Icones\\pesquisar.png")); // NOI18N
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

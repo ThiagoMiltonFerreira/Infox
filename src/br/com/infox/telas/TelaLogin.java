@@ -15,7 +15,7 @@ public class TelaLogin extends javax.swing.JFrame {
     PreparedStatement pst = null; // smp colocar na tela que ira usar o bacco
     java.sql.Connection conexao = null;
     ResultSet rs = null; //smp colocar na tela que ira usar o bacco
-
+    
     // Cria variavel conexao 
     public void logar() {
         String sql = "SELECT * from tbusuarios where login =? and senha =?";
@@ -34,16 +34,15 @@ public class TelaLogin extends javax.swing.JFrame {
                 //System.out.println(perfil);
                 // A decisao abaixo trata o perfil do usuario destrava os botoes para o usaurio admin..
                 if (perfil.equals("admin")) {
-                    TelaPrincipal principal = new TelaPrincipal(); //instacia a nova tela a ser aberta
-                    principal.setVisible(true); //abre nova tela
-                    TelaPrincipal.relatorioGeral.setEnabled(true);
-                    TelaPrincipal.MenCadUsu.setEnabled(true);
-                    TelaPrincipal.lblUsuario.setText(rs.getString(2)); // Pega o conteudo da coluna 2 do banco de dados(campo nome) e seta para o label.
-                    TelaPrincipal.lblUsuario.setForeground(Color.red);
-                    this.dispose(); // fecha tela antiga
+                  // chama a tela de cadastro da empresa caso o usuario for ADM  
+                  telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
+                  empresaInicial.setVisible(true);
+                  
+                  this.dispose(); // fecha tela antiga
 
                 }else
                 {
+              
                     // abre a tela inicial travada alguns campos que esta configurado para estar travados para desterminados usuarios se nao for admin
                     TelaPrincipal principal = new TelaPrincipal(); //instacia a nova tela a ser aberta
                     principal.setVisible(true); //abre nova tela
@@ -53,7 +52,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
+                
+                JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos!");
+               
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "erro:  " + e);
