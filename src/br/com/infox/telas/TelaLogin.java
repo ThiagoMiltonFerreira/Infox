@@ -15,10 +15,58 @@ public class TelaLogin extends javax.swing.JFrame {
     PreparedStatement pst = null; // smp colocar na tela que ira usar o bacco
     java.sql.Connection conexao = null;
     ResultSet rs = null; //smp colocar na tela que ira usar o bacco
-    
+    String statusContrato2=null;
     // Cria variavel conexao 
+    
+     public void verificaContrato() {
+         
+         String sql2 = "SELECT * from tbempresas where contrato =0";
+                
+        try {
+            pst = conexao.prepareStatement(sql2);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            if (rs.next())
+            {
+                //JOptionPane.showMessageDialog(null,rs.getString(8) );
+                if (rs.getString(8).equals("0"))
+                {
+                        TelaPrincipal principal = new TelaPrincipal(); 
+                        principal.setVisible(true);
+                        TelaPrincipal.MenCadUsu.setEnabled(true);
+                        TelaPrincipal.relatorioGeral.setEnabled(true);
+                        TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                        this.dispose(); 
+                }else
+                {
+                        telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
+                        empresaInicial.setVisible(true);
+                        this.dispose(); 
+                }    
+            }else{
+                      telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
+                      empresaInicial.setVisible(true);
+                      this.dispose(); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+     }
+    
+    
     public void logar() {
         String sql = "SELECT * from tbusuarios where login =? and senha =?";
+        
         try {
             //as linhas abaixo prepara consulta ao banco em funçao do que foi dizitado nas caixas de texto
             // o interroga e substituido pelo conteudo das variaveis. entao ja busca o usuario respectivo ao campo de texto
@@ -31,17 +79,13 @@ public class TelaLogin extends javax.swing.JFrame {
             if (rs.next()) {
                 
                         String perfil = rs.getString(6); //Linha abaixo obtem o conteudo do campo perfil da tabela tbusuario de acordo com a posicao do campo no caso o 6 e do status do perfil
+                        //JOptionPane.showMessageDialog(null, rs.getString(6));
                         //System.out.println(perfil);
                         // A decisao abaixo trata o perfil do usuario destrava os botoes para o usaurio admin..
                 if (perfil.equals("admin")) 
-                {
-                    
-                        // JOptionPane.showMessageDialog(null, "CADASTRO DE EMPRESA");
-                        // chama a tela de cadastro da empresa caso o usuario for ADM  
-                        telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
-                        empresaInicial.setVisible(true);
-                        this.dispose(); 
-
+                {   
+                   
+                   verificaContrato();
                 }else
                 {
               
@@ -64,7 +108,7 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }
 
-    public TelaLogin() 
+    public TelaLogin()
     {
         initComponents();
         ModuloConexao chamaConexao = new ModuloConexao();
@@ -75,14 +119,14 @@ public class TelaLogin extends javax.swing.JFrame {
         if (chamaConexao.conector() != null) {
             //Seta o labl com a imagem que esta dentro do pacote imagem
             lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/bdok.png")));
-
-        } else {
-
-            lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/bdError.png")));
-
-        }
-    }
-
+   
+         }else
+            {
+                    
+                lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/bdError.png")));
+                    
+            }   
+    }    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -119,9 +163,8 @@ public class TelaLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +172,8 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -159,9 +203,8 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // Chamando o metodo logar que chama e verifica se existe o usuario no banco
-        logar();
-
+        // Chamando o metodo logar que chama e verifica se existe o usuario no banco, dentro do logar chama o metodo verifica contrato        
+       logar();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

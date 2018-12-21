@@ -277,6 +277,7 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
        }
        else
        {
+           //JOptionPane.showMessageDialog(null,rbtLicontrato.isSelected());
             salvarEmpresaAoEntrar();
        }
     }//GEN-LAST:event_jButton1ActionPerformed
