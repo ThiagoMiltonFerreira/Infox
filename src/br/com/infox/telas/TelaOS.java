@@ -34,6 +34,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     public TelaOS() {
         initComponents();
         conexao = ModuloConexao.conector();
+        
     }
 
     private void pesquisar_cliente() {

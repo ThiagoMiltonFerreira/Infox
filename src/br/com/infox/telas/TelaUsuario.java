@@ -5,7 +5,12 @@ import br.com.infox.dal.ModuloConexao; //importa a conexao
 import br.com.infox.dal.limpaOsCamposUsuario;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 /**
  *
  * @author ART
@@ -23,6 +28,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     public TelaUsuario() { //CONSTRUTOR DA TELA
         initComponents();
         conexao = ModuloConexao.conector(); //chama a conexao smp colocar na tela que sera usado conexao
+
     
     }
     

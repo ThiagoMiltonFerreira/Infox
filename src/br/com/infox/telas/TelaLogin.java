@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
 
+    Principal validaCNPJ = new Principal();
     PreparedStatement pst = null; // smp colocar na tela que ira usar o bacco
     java.sql.Connection conexao = null;
     ResultSet rs = null; //smp colocar na tela que ira usar o bacco
@@ -39,19 +40,24 @@ public class TelaLogin extends javax.swing.JFrame {
                 //JOptionPane.showMessageDialog(null,rs.getString(8) );
                 if (rs.getString(8).equals("0"))
                 {
+
                         TelaPrincipal principal = new TelaPrincipal(); 
                         principal.setVisible(true);
                         TelaPrincipal.MenCadUsu.setEnabled(true);
                         TelaPrincipal.relatorioGeral.setEnabled(true);
                         TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                        
                         this.dispose(); 
-                }else
+                }
+                else
                 {
                         telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
                         empresaInicial.setVisible(true);
                         this.dispose(); 
                 }    
-            }else{
+            }
+            else
+            {
                       telaEmpresaInicial empresaInicial = new telaEmpresaInicial();
                       empresaInicial.setVisible(true);
                       this.dispose(); 
@@ -84,9 +90,9 @@ public class TelaLogin extends javax.swing.JFrame {
                         // A decisao abaixo trata o perfil do usuario destrava os botoes para o usaurio admin..
                 if (perfil.equals("admin")) 
                 {   
-                   
                    verificaContrato();
-                }else
+                }
+                else
                 {
               
                     // JOptionPane.showMessageDialog(null, "ELSE");

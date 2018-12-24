@@ -5,27 +5,49 @@
  */
 package br.com.infox.telas;
 
+import ValidaCPFeCNPJ.CNPJ;
+import ValidaCPFeCNPJ.CPF;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao; //importa a conexao
+import static br.com.infox.telas.Principal.c_documento;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author Adm
  */
 public class telaEmpresaInicial extends javax.swing.JFrame {
-
+   
     PreparedStatement pst = null; // smp colocar na tela que ira usar o bacco
     java.sql.Connection conexao = null;// smp colocar na tela que ira usar o bacco
     ResultSet rs = null; //smp colocar na tela que ira usar o bacco EXIBE O RESULTADO DA CONXECAO COM BANCO
     boolean contrato=false;
+    String empresa = "";
     /**
      * Creates new form telaEmpresaInicial
      */
     public telaEmpresaInicial() {
         initComponents();
         conexao=ModuloConexao.conector(); // inicia conexao ao abrir o frm
+        MaskFormatter maskCnpj = null;  
+        try {
+            maskCnpj = new MaskFormatter("##.###.###/####-##");
+        } catch (ParseException ex) {
+            Logger.getLogger(telaEmpresaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        maskCnpj.install(lblCnpj); 
+        
+        lblEmail.setEnabled(false);
+        lblResponsavel.setEnabled(false);
+        lbltelefone.setEnabled(false);
+    
+        
     }
 
     /**
@@ -49,14 +71,16 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JTextField();
         lblEndereco = new javax.swing.JTextField();
-        lblCnpj = new javax.swing.JTextField();
         lblEmail = new javax.swing.JTextField();
         lblResponsavel = new javax.swing.JTextField();
-        lbltelefone = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         rbtLicontrato = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
+        btnValidarCNPJ = new javax.swing.JButton();
+        lblCnpj = new javax.swing.JFormattedTextField();
+        lblVerificaCnpj = new javax.swing.JLabel();
+        lbltelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bem Vindo!");
@@ -80,19 +104,13 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
 
         jLabel8.setText("Responsavel: ");
 
-        jLabel9.setText("Telfone de contato: ");
+        jLabel9.setText("Telefone de contato: ");
 
         jLabel10.setText("Contrato: ");
 
         lblEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblEmpresaActionPerformed(evt);
-            }
-        });
-
-        lblCnpj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblCnpjActionPerformed(evt);
             }
         });
 
@@ -112,6 +130,13 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnValidarCNPJ.setText("Validar");
+        btnValidarCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarCNPJActionPerformed(evt);
             }
         });
 
@@ -136,10 +161,6 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbltelefone))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblResponsavel))
@@ -149,22 +170,31 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
                         .addComponent(lblEmail))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbltelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lblEmpresa))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblEndereco)
-                                        .addComponent(lblCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))))
                             .addComponent(jLabel10)
-                            .addComponent(rbtLicontrato))
+                            .addComponent(rbtLicontrato)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblEmpresa))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                            .addComponent(lblCnpj))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnValidarCNPJ)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblVerificaCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -189,7 +219,9 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(lblCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnValidarCNPJ)
+                    .addComponent(lblCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblVerificaCnpj))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -260,27 +292,54 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblEmpresaActionPerformed
 
-    private void lblCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblCnpjActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblCnpjActionPerformed
-
     private void rbtLicontratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtLicontratoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtLicontratoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-       if(!rbtLicontrato.isSelected() || lblEmpresa.getText().equals("") || lblEndereco.getText().equals("") || lblCnpj.getText().equals("") || lblEmail.getText().equals("") || lblResponsavel.getText().equals("") || lbltelefone.getText().equals(""))
+        
+       
+       if(!rbtLicontrato.isSelected() || lblEmpresa.getText().equals("") || lblEndereco.getText().equals("") || lblCnpj.getText().equals("") || lblEmail.getText().equals("") || lblResponsavel.getText().equals("") || lbltelefone.getText().equals("") || lblVerificaCnpj.getText().equals(""))
        {
 
-            JOptionPane.showMessageDialog(null,"Campo em branco favor verificar!");
+            JOptionPane.showMessageDialog(null,"Campo em branco / ou CNPJ nao Validado.Favor verificar!");
+            
        }
        else
        {
            //JOptionPane.showMessageDialog(null,rbtLicontrato.isSelected());
-            salvarEmpresaAoEntrar();
+           salvarEmpresaAoEntrar();
+           
        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnValidarCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarCNPJActionPerformed
+         
+        String cnpj = lblCnpj.getText();
+        String documento = lblCnpj.getText();
+        telaEmpresaInicial telaEmpresa = new telaEmpresaInicial();
+        CNPJ pj = new CNPJ(documento);
+            if(pj.isCNPJ())
+            {
+                lblCnpj.setText(pj.getCNPJ(true));
+                lblVerificaCnpj.setText("Valido!");
+                lblEmail.setEnabled(true);
+                lblResponsavel.setEnabled(true);
+                lbltelefone.setEnabled(true);
+                MaskFormatter maskTel = null;  
+                try {
+                        maskTel = new MaskFormatter("(##)#-####-####");
+                    } catch (ParseException ex) {
+                        Logger.getLogger(telaEmpresaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                maskTel.install(lbltelefone); 
+                
+            }else
+            {
+
+                JOptionPane.showMessageDialog(rootPane,"CNPJ inválido!");
+            }
+    }//GEN-LAST:event_btnValidarCNPJActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,6 +377,7 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnValidarCNPJ;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -331,12 +391,13 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField lblCnpj;
-    private javax.swing.JTextField lblEmail;
-    private javax.swing.JTextField lblEmpresa;
+    public javax.swing.JFormattedTextField lblCnpj;
+    public javax.swing.JTextField lblEmail;
+    public javax.swing.JTextField lblEmpresa;
     private javax.swing.JTextField lblEndereco;
-    private javax.swing.JTextField lblResponsavel;
-    private javax.swing.JTextField lbltelefone;
+    public javax.swing.JTextField lblResponsavel;
+    private javax.swing.JLabel lblVerificaCnpj;
+    private javax.swing.JFormattedTextField lbltelefone;
     private javax.swing.JCheckBox rbtLicontrato;
     // End of variables declaration//GEN-END:variables
 }
