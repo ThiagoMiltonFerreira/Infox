@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
+import webServiceViaCep.WebServiceCep;
 
 /**
  *
@@ -46,6 +47,8 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
         lblEmail.setEnabled(false);
         lblResponsavel.setEnabled(false);
         lbltelefone.setEnabled(false);
+        lblCep.setEnabled(false);
+        lblEndereco.setEnabled(false);
     
         
     }
@@ -81,6 +84,9 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
         lblCnpj = new javax.swing.JFormattedTextField();
         lblVerificaCnpj = new javax.swing.JLabel();
         lbltelefone = new javax.swing.JFormattedTextField();
+        jLabel11 = new javax.swing.JLabel();
+        btnBuscarCep = new javax.swing.JButton();
+        lblCep = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bem Vindo!");
@@ -114,6 +120,18 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
             }
         });
 
+        lblEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblEmailActionPerformed(evt);
+            }
+        });
+
+        lblResponsavel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblResponsavelActionPerformed(evt);
+            }
+        });
+
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Concessão da Licença:\n2.1 - A LICENCIANTE, neste ato e pela melhor forma de direito, outorga ao LICENCIADO uma licença de\nuso, em caráter não exclusivo e intransferível, para utilização do software.\n2.2 - A licença concedida nos termos deste instrumento é válida somente no Brasil. O LICENCIADO não\nremeterá, transferirá ou exportará de outra forma o produto para fora do território sem a anuência\nprévia por escrito da LICENCIANTE e o pagamento pelo LICENCIADO das eventuais taxas adicionais aos\níndices em vigor da LICENCIANTE.\n2.3 - APLICA-SE A ESTE CONTRATO O DISPOSTO NAS LEIS 9.609/98 (PROTEÇÃO DA PROPRIEDADE\nINTELECTUAL DO SOFTWARE) E 9.610/98 (PROTEÇÃO DOS DIREITOS AUTORAIS);");
@@ -140,6 +158,21 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
             }
         });
 
+        lbltelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lbltelefoneActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("CEP:");
+
+        btnBuscarCep.setText("Buscar");
+        btnBuscarCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCepActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,44 +190,54 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblResponsavel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblEmail))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(rbtLicontrato)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbltelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(rbtLicontrato)
+                                .addGap(458, 458, 458)
+                                .addComponent(lblVerificaCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblEmpresa))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel11))
+                                        .addGap(5, 5, 5)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(lblCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(btnValidarCNPJ))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(lblCep)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(btnBuscarCep)))
+                                            .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6))
+                                            .addComponent(jLabel7)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel5)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblEmail)
+                                            .addComponent(lblEndereco)
+                                            .addComponent(lblResponsavel)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                                            .addComponent(lblCnpj))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnValidarCNPJ)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblVerificaCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lbltelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -202,39 +245,50 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblVerificaCnpj))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
-                .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))
+                            .addComponent(btnValidarCNPJ))
+                        .addGap(0, 13, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(btnBuscarCep)
+                    .addComponent(jLabel11)
+                    .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(btnValidarCNPJ)
-                    .addComponent(lblCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVerificaCnpj))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(lblResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(lbltelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +296,7 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
                 .addComponent(rbtLicontrato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,6 +342,26 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
         }
         
     }
+    public void bucaCep(String cep){
+        
+        WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
+        if(webServiceCep.wasSuccessful())
+        {
+            /**
+            System.out.println("Rua : "+webServiceCep.getLogradouro()); 
+            System.out.println("Bairro : "+webServiceCep.getLogradouro());
+            System.out.println("Cidade : "+webServiceCep.getCidade());
+            System.out.println("Estado : "+webServiceCep.getUf());
+            */
+            lblEndereco.setText(webServiceCep.getLogradouro()+" "+webServiceCep.getCidade()+" / "+webServiceCep.getBairro()+" - "+webServiceCep.getUf());
+            
+            
+        }
+        else
+        {
+          JOptionPane.showMessageDialog(null,"Cep Incorreto.");
+        }
+    }
     private void lblEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblEmpresaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lblEmpresaActionPerformed
@@ -326,20 +400,61 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
                 lblEmail.setEnabled(true);
                 lblResponsavel.setEnabled(true);
                 lbltelefone.setEnabled(true);
+                lblCep.setEnabled(true);
+                lblEndereco.setEnabled(true);
+                /**
                 MaskFormatter maskTel = null;  
+           
                 try {
                         maskTel = new MaskFormatter("(##)#-####-####");
+                    
                     } catch (ParseException ex) {
                         Logger.getLogger(telaEmpresaInicial.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 maskTel.install(lbltelefone); 
-                
+              **/
+                 MaskFormatter maskCep = null;  
+           
+                try {
+                        maskCep = new MaskFormatter("#####-###");
+                    
+                    } catch (ParseException ex) {
+                        Logger.getLogger(telaEmpresaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                maskCep.install((JFormattedTextField) lblCep); 
             }else
             {
 
                 JOptionPane.showMessageDialog(rootPane,"CNPJ inválido!");
             }
     }//GEN-LAST:event_btnValidarCNPJActionPerformed
+
+    private void lblResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblResponsavelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblResponsavelActionPerformed
+
+    private void lblEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblEmailActionPerformed
+
+    private void lbltelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbltelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbltelefoneActionPerformed
+
+    private void btnBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCepActionPerformed
+        // Envia o numero do cep para a classe de busca que envia para o web service do busca cep
+        bucaCep(lblCep.getText().toString());
+         MaskFormatter maskTel = null;  
+           
+        try {
+                maskTel = new MaskFormatter("(##)#-####-####");
+                    
+            } catch (ParseException ex) {
+                        Logger.getLogger(telaEmpresaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            maskTel.install(lbltelefone); 
+       
+    }//GEN-LAST:event_btnBuscarCepActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,10 +492,12 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarCep;
     private javax.swing.JButton btnValidarCNPJ;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -391,6 +508,7 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JFormattedTextField lblCep;
     public javax.swing.JFormattedTextField lblCnpj;
     public javax.swing.JTextField lblEmail;
     public javax.swing.JTextField lblEmpresa;
