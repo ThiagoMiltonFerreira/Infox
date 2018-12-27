@@ -12,12 +12,14 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao; //importa a conexao
 import static br.com.infox.telas.Principal.c_documento;
+import envioEmail.JavaMail;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import webServiceViaCep.WebServiceCep;
+
 
 /**
  *
@@ -372,6 +374,7 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+       envioEmail.JavaMail envioEmail = new JavaMail();
        
        if(!rbtLicontrato.isSelected() || lblEmpresa.getText().equals("") || lblEndereco.getText().equals("") || lblCnpj.getText().equals("") || lblEmail.getText().equals("") || lblResponsavel.getText().equals("") || lbltelefone.getText().equals("") || lblVerificaCnpj.getText().equals(""))
        {
@@ -382,6 +385,12 @@ public class telaEmpresaInicial extends javax.swing.JFrame {
        else
        {
            //JOptionPane.showMessageDialog(null,rbtLicontrato.isSelected());
+           //envioEmail.enviaEmail(lblEmail.getText());
+           if(envioEmail.enviaEmail(lblEmail.getText())==true)
+           {  //pega o retorno da classe JavaMail e e verifica se e true e seta o texto e logo apos salva no banco
+               lblEmail.setText("EmailIncorretoNoCadastroInicialDeEmpresa");
+           }
+           
            salvarEmpresaAoEntrar();
            
        }
