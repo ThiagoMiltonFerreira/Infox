@@ -1,29 +1,29 @@
 .1- Criar SSH 
  
- Tendo cadastrado e logado em sua conta, agora vocÍ precisa de uma chave SSH para poder comeÁar a comitar. No Git Bash digite:
+ Tendo cadastrado e logado em sua conta, agora voc√™ precisa de uma chave SSH para poder come√ßar a comitar. No Git Bash digite:
 
 ssh-keygen -t rsa -C "seu_email@email.com"
-Informe no comando seu e-mail cadastrado no GitHub. DÍ Enter na prÛxima pergunta (sobre o arquivo a ser criado?ó?vamos deixar o padr„o).
+Informe no comando seu e-mail cadastrado no GitHub. D√™ Enter na pr√≥xima pergunta (sobre o arquivo a ser criado?‚Äî?vamos deixar o padr√£o).
 
-A prÛxima pergunta vai te pedir uma senha (passphrase). Invente uma senha e a informe. Ele vai pedir uma confirmaÁ„o. Digite a senha novamente e Enter. Digite agora:
+A pr√≥xima pergunta vai te pedir uma senha (passphrase). Invente uma senha e a informe. Ele vai pedir uma confirma√ß√£o. Digite a senha novamente e Enter. Digite agora:
 
 notepad ~/.ssh/id_rsa.pub
 para abrir no Bloco de Notas o arquivo que foi criado.
 
-Agora no GitHub, v· em ìSettingsî e depois ìSSH and GPG Keysî. Clique ìNew SSH keyî. Informe um tÌtulo para identificar o computador onde a a chave foi gerada e no campo ìKeyî cole todo o conte˙do do arquivo id_rsa.pub (que vocÍ abriu no Bloco de Notas)
+Agora no GitHub, v√° em ‚ÄúSettings‚Äù e depois ‚ÄúSSH and GPG Keys‚Äù. Clique ‚ÄúNew SSH key‚Äù. Informe um t√≠tulo para identificar o computador onde a a chave foi gerada e no campo ‚ÄúKey‚Äù cole todo o conte√∫do do arquivo id_rsa.pub (que voc√™ abriu no Bloco de Notas)
 
 
-Tome cuidado de copiar e colar todo o conte˙do do arquivo, comeÁando por ìssh-rsa Öî atÈ o seu e-mail (incluindo ele, como na imagem). Clique em ìAdd Keyî.
+Tome cuidado de copiar e colar todo o conte√∫do do arquivo, come√ßando por ‚Äússh-rsa ‚Ä¶‚Äù at√© o seu e-mail (incluindo ele, como na imagem). Clique em ‚ÄúAdd Key‚Äù.
 
-Vamos testar pra ver se essa bagaÁa deu certo. No Git Bash digite:
+Vamos testar pra ver se essa baga√ßa deu certo. No Git Bash digite:
 
 ssh -T git@github.com
-Ele vai perguntar se vocÍ tem certeza que quer conectar bla bla bla (yes/no). Digite yes e Enter. Na prÛxima pergunta (Enter passphraseÖ) informe sua senha (a que vocÍ escolheu ao criar a chave SSH).
+Ele vai perguntar se voc√™ tem certeza que quer conectar bla bla bla (yes/no). Digite yes e Enter. Na pr√≥xima pergunta (Enter passphrase‚Ä¶) informe sua senha (a que voc√™ escolheu ao criar a chave SSH).
 
-Se vocÍ receber uma mensagem do tipo:
+Se voc√™ receber uma mensagem do tipo:
 
 Hi doug2k1! You've successfully authenticated, but GitHub does not provide shell access.
-Ent„o tudo deu certo!
+Ent√£o tudo deu certo!
 
 
 2 -  Configurar GIT
@@ -33,14 +33,14 @@ Ent„o tudo deu certo!
 
 3 - Conectar com repositorio Remoto
 
- $ git remote add origin ENDERE«O SHH
+ $ git remote add origin ENDERE√áO SHH
   obs: "Origin e o nome dado ao remote" 
 
 4 - Clonar repositorio web para o local
  
- $ git clone ENDERE«O SSH DO PROJETO
+ $ git clone ENDERE√áO SSH DO PROJETO
 
- --> Quando nao for meu repositorio tem que fazer o FORK, clicar em fork dentro do git rub  para entrar na colaboraÁao. E o projeto vai estar na sua lista de repositorios.
+ --> Quando nao for meu repositorio tem que fazer o FORK, clicar em fork dentro do git rub  para entrar na colabora√ßao. E o projeto vai estar na sua lista de repositorios.
 
 5 - Baixar repositorio especifico
  $ git push origin master
@@ -50,7 +50,18 @@ Ent„o tudo deu certo!
 6 - Atualizar local com o web. SMP ATUALIZAR AO ABRIR O GIT POIS OUTRO DESENVOLVEDOR PODE TER ALTERADO
  $ git pull
 
+7- Conflito ao dar git pull, se o seu branch local tiver com altera√ßao mas voce nao quer add e da commit, ou seja descartar as altra√ßoes locais e buscar as que estao no gitHub.
+Exemplo comecei alterar em um pc e nao commitei e fiz tudo em outro. os arquivos que esta no primeiro pc tem que ser descartado
+entao ultiliza se 
 
+git reset ‚Äìhard HEAD
+git clean -f -d
+
+limpa td conteudo antes do commit (antes de dar o GIT ADD . )
+
+Apos descartar 
+ $ git pull
+ nao havera mais conflitos.
 
 
 
@@ -59,4 +70,4 @@ COPIA O BRANCH QUE FOI CRIADO NO GIT(TESTE) PARA O REPOSITORIO LOCAL NA MAQUINA
 $ git checkout -t origin/teste
 ...................................................................................
 JA DENTRO DO BRANCH TESTE JA PODE ADD E COMMITAR QUE JA IRA PARA O 
-BRA«O DE TESTE
+BRA√áO DE TESTE
