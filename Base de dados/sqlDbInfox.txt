@@ -1,6 +1,16 @@
 
 Cria base de dados se ela nao existe
 
+Usuario e senha acesso ao servidor de banco de dados
+Banco de dados: sgo123
+Nome de usu√°rio: sgo123
+Email: thiagomilton.f@gmail.com
+Servidor mysql : db4free.net
+
+
+
+
+
 CREATE DATABASE IF NOT EXISTS dbinfox;
 
 ........................................................
@@ -51,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `dbinfox`.`tbos` (
 
 
 
-***AlteraÁ„o 19/12 para criaÁ„o da tela EMPRESAS.Base de dados externa*****
+***Altera√ß√£o 19/12 para cria√ß√£o da tela EMPRESAS.Base de dados externa*****
 
 CREATE DATABASE IF NOT EXISTS dbinfoxExterna;
 
@@ -119,13 +129,13 @@ describe dadoscnpj
 
 
 
--- Coment·rios
+-- Coment√°rios
 -- a linha a baixo cria um banco de dados
 create database dbinfox;
 --
  a linha abaixo escolhe o banco de dados a ser ultilizado
 use dbinfox;
--- o bloco de instruÁoes a baixo cria tabela
+-- o bloco de instru√ßoes a baixo cria tabela
 create table tbusuarios(
 iduser int primary key, 
 usuario varchar(50) not null,
@@ -193,12 +203,12 @@ delete from tbclientes where idcli=5;
  describe tbos;
  
  insert into tbos(equipamento,defeito,servico,tecnico,valor,idcli)
- values('Notbook', 'Nao liga','Troca da fonte','ZÈ',87.50,1);
+ values('Notbook', 'Nao liga','Troca da fonte','Z√©',87.50,1);
  
   select * from tbos;
   
   
-  -- o codigo abaixo tras informaÁoes de duas tabelas
+  -- o codigo abaixo tras informa√ßoes de duas tabelas
   
   select
   O.os,equipamento,defeito,servico,valor, -- seleciona da tabela (OS o O. e uma variavel) os campos ,equipamento,defeito,servico,valor 
