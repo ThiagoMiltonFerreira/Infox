@@ -145,11 +145,11 @@ public class TelaOsRelatorio extends javax.swing.JInternalFrame {
        String nomeDaTabela="";
         if(cboTipo.getSelectedItem().equals("Ordem de serviço"))
         {
-           nomeDaTabela="tbOs";
+           nomeDaTabela="tbos";
            System.out.println(nomeDaTabela);
            
         }else if(cboTipo.getSelectedItem().equals("Clientes")){
-           nomeDaTabela="tbClientes";
+           nomeDaTabela="tbclientes";
            //System.out.println(nomeDaTabela);  
         }
               
