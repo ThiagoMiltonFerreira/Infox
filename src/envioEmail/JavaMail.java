@@ -45,7 +45,7 @@ public class JavaMail {
  
                   message.setRecipients(Message.RecipientType.TO, toUser);
                   message.setSubject("Obrigado por se cadastrar no Infox Ordem de serviço.");//Assunto
-                  message.setText("Prezados,/nObrigado Por ultilizar o Infox Gerenciador de ordem de serviços!/nPara Suporte ou atendimento comercial entre em contato pelo numero (31)9-9390-3976./nAtenciosamente,/nEquipe Infox Software. ");
+                  message.setText("Prezados,Obrigado Por ultilizar o Infox Gerenciador de ordem de serviços! Para Suporte ou atendimento comercial entre em contato pelo numero (31)9-9390-3976.Atenciosamente,Equipe Infox Software. ");
                   /**Método para enviar a mensagem criada*/
                   Transport.send(message);
  
