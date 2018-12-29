@@ -1,29 +1,29 @@
 .1- Criar SSH 
  
- Tendo cadastrado e logado em sua conta, agora você precisa de uma chave SSH para poder começar a comitar. No Git Bash digite:
+ Tendo cadastrado e logado em sua conta, agora vocÃª precisa de uma chave SSH para poder comeÃ§ar a comitar. No Git Bash digite:
 
 ssh-keygen -t rsa -C "seu_email@email.com"
-Informe no comando seu e-mail cadastrado no GitHub. Dê Enter na próxima pergunta (sobre o arquivo a ser criado?—?vamos deixar o padrão).
+Informe no comando seu e-mail cadastrado no GitHub. DÃª Enter na prÃ³xima pergunta (sobre o arquivo a ser criado?â€”?vamos deixar o padrÃ£o).
 
-A próxima pergunta vai te pedir uma senha (passphrase). Invente uma senha e a informe. Ele vai pedir uma confirmação. Digite a senha novamente e Enter. Digite agora:
+A prÃ³xima pergunta vai te pedir uma senha (passphrase). Invente uma senha e a informe. Ele vai pedir uma confirmaÃ§Ã£o. Digite a senha novamente e Enter. Digite agora:
 
 notepad ~/.ssh/id_rsa.pub
 para abrir no Bloco de Notas o arquivo que foi criado.
 
-Agora no GitHub, vá em “Settings” e depois “SSH and GPG Keys”. Clique “New SSH key”. Informe um título para identificar o computador onde a a chave foi gerada e no campo “Key” cole todo o conteúdo do arquivo id_rsa.pub (que você abriu no Bloco de Notas)
+Agora no GitHub, vÃ¡ em â€œSettingsâ€ e depois â€œSSH and GPG Keysâ€. Clique â€œNew SSH keyâ€. Informe um tÃ­tulo para identificar o computador onde a a chave foi gerada e no campo â€œKeyâ€ cole todo o conteÃºdo do arquivo id_rsa.pub (que vocÃª abriu no Bloco de Notas)
 
 
-Tome cuidado de copiar e colar todo o conteúdo do arquivo, começando por “ssh-rsa …” até o seu e-mail (incluindo ele, como na imagem). Clique em “Add Key”.
+Tome cuidado de copiar e colar todo o conteÃºdo do arquivo, comeÃ§ando por â€œssh-rsa â€¦â€ atÃ© o seu e-mail (incluindo ele, como na imagem). Clique em â€œAdd Keyâ€.
 
-Vamos testar pra ver se essa bagaça deu certo. No Git Bash digite:
+Vamos testar pra ver se essa bagaÃ§a deu certo. No Git Bash digite:
 
 ssh -T git@github.com
-Ele vai perguntar se você tem certeza que quer conectar bla bla bla (yes/no). Digite yes e Enter. Na próxima pergunta (Enter passphrase…) informe sua senha (a que você escolheu ao criar a chave SSH).
+Ele vai perguntar se vocÃª tem certeza que quer conectar bla bla bla (yes/no). Digite yes e Enter. Na prÃ³xima pergunta (Enter passphraseâ€¦) informe sua senha (a que vocÃª escolheu ao criar a chave SSH).
 
-Se você receber uma mensagem do tipo:
+Se vocÃª receber uma mensagem do tipo:
 
 Hi doug2k1! You've successfully authenticated, but GitHub does not provide shell access.
-Então tudo deu certo!
+EntÃ£o tudo deu certo!
 
 
 2 -  Configurar GIT
@@ -33,17 +33,20 @@ Então tudo deu certo!
 
 3 - Conectar com repositorio Remoto
 
- $ git remote add origin ENDEREÇO SHH
+ $ git remote add origin ENDEREÃ‡O SHH
   obs: "Origin e o nome dado ao remote" 
 
 4 - Clonar repositorio web para o local
  
- $ git clone ENDEREÇO SSH DO PROJETO
+ $ git clone ENDEREÃ‡O SSH DO PROJETO
 
- --> Quando nao for meu repositorio tem que fazer o FORK, clicar em fork dentro do git rub  para entrar na colaboraçao. E o projeto vai estar na sua lista de repositorios.
+ --> Quando nao for meu repositorio tem que fazer o FORK, clicar em fork dentro do git rub  para entrar na colaboraÃ§ao. E o projeto vai estar na sua lista de repositorios.
 
 5 - Baixar repositorio especifico
  $ git push origin master
+ 
+ *Clonar o branch especifico INFOXNUVEM
+ $ git clone -b infoxnuvem git@github.com:ThiagoMiltonFerreira/Infox.git
 
  Obs: "origin" nome do push tem nao pode se repetir DA ERRO
 
@@ -59,4 +62,4 @@ COPIA O BRANCH QUE FOI CRIADO NO GIT(TESTE) PARA O REPOSITORIO LOCAL NA MAQUINA
 $ git checkout -t origin/teste
 ...................................................................................
 JA DENTRO DO BRANCH TESTE JA PODE ADD E COMMITAR QUE JA IRA PARA O 
-BRAÇO DE TESTE
+BRAÃ‡O DE TESTE
