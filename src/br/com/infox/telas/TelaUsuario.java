@@ -24,12 +24,22 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     PreparedStatement pst = null; // smp colocar na tela que ira usar o bacco
     java.sql.Connection conexao = null;// smp colocar na tela que ira usar o bacco
     ResultSet rs = null; //smp colocar na tela que ira usar o bacco EXIBE O RESULTADO DA CONXECAO COM BANCO
-
+    
     public TelaUsuario() { //CONSTRUTOR DA TELA
         initComponents();
         conexao = ModuloConexao.conector(); //chama a conexao smp colocar na tela que sera usado conexao
-
-    
+        /**
+        MaskFormatter maskTel = null;  
+           
+        try {
+                maskTel = new MaskFormatter("(##)#-####-####");
+                    
+            } catch (ParseException ex) {
+                        Logger.getLogger(telaEmpresaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            maskTel.install((JFormattedTextField) txtUsuFone); 
+        **/
+        
     }
     
     private void consultarUsuario(){
