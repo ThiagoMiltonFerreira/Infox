@@ -46,7 +46,10 @@ Então tudo deu certo!
  $ git push origin master
 
  Obs: "origin" nome do push tem nao pode se repetir DA ERRO
-
+ 
+ *Clonar o branch especifico INFOXNUVEM
+ $ git clone -b infoxnuvem git@github.com:ThiagoMiltonFerreira/Infox.git
+ 
 6 - Atualizar local com o web. SMP ATUALIZAR AO ABRIR O GIT POIS OUTRO DESENVOLVEDOR PODE TER ALTERADO
  $ git pull
 
